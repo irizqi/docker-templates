@@ -1,0 +1,15 @@
+services:
+  ghost:
+    container_name: standard-ghost
+    image: ghost:5.130.3-alpine
+    ports:
+      -  2368:2368
+    volumes:
+      - content:/var/lib/ghost/content
+    environment:
+      - database__client=sqlite3 # Use SQLite as the database client
+      - database__connection__filename=/var/lib/ghost/content/data/ghost.db
+      - url=${GHOST_URL}
+
+volumes:
+  content:
